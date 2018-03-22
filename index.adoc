@@ -360,3 +360,135 @@ En el archivo `src/app/pages/tabs/tabs.ts`:
 
 ### Modificación de la página de contacto
 
+.El archivo `src/app/pages/contact/contact.html`
+====
+[source]
+----
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Contacto
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img src = "../../assets/imgs/UAL.png"> <1>
+  
+  <ion-list> <2>
+    <ion-item (click)="openURL('https://www.google.com/maps/dir/?api=1&destination=Universidad%20de%20Almer%C3%ADa')"> <3>
+      <ion-icon name = "pin" item-start></ion-icon> <4>
+      <p>Carretera Sacramento s/n</p> <5>
+      <p>04120 La Cañada de San Urbano</p>
+      <p>Almería</p>
+    </ion-item>
+    
+    <ion-item (click)="openURL('https://cms.ual.es/UAL/contacto/index.htm')">
+      <ion-icon name = "mail" item-start></ion-icon>
+      <p>Contacta con nostros</p>
+    </ion-item>
+  </ion-list>
+  
+  <ion-item-group> <6>
+    <ion-item-divider color="light">Teléfonos de interés</ion-item-divider> <7>
+    <ion-item (click)="call('950214000')"> <8>
+      <h2>Información general para estudiantes (Secretaría)</h2> <9>
+      <p>+34 950 21 40 00</p>
+      <ion-icon name = "call" item-end></ion-icon> <10>
+    </ion-item>
+    <ion-item (click)="call('950214999')">
+      <h2>Cita previa</h2>
+      <p>+34 950 21 49 99</p>
+      <ion-icon name = "call" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="call('950015550')">
+      <h2>Conserjería del Edificio Central</h2>
+      <p>+34 950 01 55 50</p>
+      <ion-icon name = "call" item-end></ion-icon>
+    </ion-item>
+    
+    <ion-item-divider color="light">Centro de atención al usuario</ion-item-divider>
+    
+    <ion-item (click)="openURL('https://otrspas.ual.es/otrs/customer.pl')"> <11>
+      <ion-icon name = "link" item-end></ion-icon>
+      <p>CAU de Administración y Servicios</p>  
+    </ion-item>
+    <ion-item (click)="openURL('https://otrs5.ual.es/otrs/customer.pl')">
+      <ion-icon name = "link" item-end></ion-icon>
+      <p>CAU de Servicios TIC</p>  
+    </ion-item>
+    
+  </ion-item-group>
+</ion-content>
+----
+<1> Imagen institucional
+<2> Primer bloque de opciones de la pantalla
+<3> Los elementos son enlaces a páginas externas. Pasamos al método `openURL()` del controlador la URL a abrir.
+<4> Creación de un icono colocado en la parte izquierda de la pantalla con `item-start`
+<5> Texto del elemento
+<6> Segundo bloque de opciones de la pantalla
+<7> Separador
+<8> Creación del elemento y asignación del controlador de evento para llamada de teléfono. Pasaremos el número de teléfono al método `call()` de nuestro controlador.
+<9> Texto del elemento
+<10> Creación de un icono colocado en la parte derecha de la pantalla con `item-end`
+<11> Los elementos de la segunda lista son enlaces a páginas externas. Pasamos al método `openURL()` del controlador la URL a abrir.
+====
+
+.El archivo `src/pages/contact/contact.ts`
+====
+[source]
+----
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number'; <1>
+
+@Component({
+  selector: 'page-contact',
+  templateUrl: 'contact.html'
+})
+export class ContactPage {
+
+  constructor(public navCtrl: NavController, private callNumber: CallNumber) { }<2>
+
+  openURL(url: string) { <3>
+    window.open(url, '__blank');
+  }
+
+  call(phoneNumber: string) { <4>
+    this.callNumber.callNumber(phoneNumber, true)
+  .then(res => console.log('Launched dialer!', res))
+  .catch(err => console.log('Error launching dialer', err));
+
+  }
+}
+----
+<1> Importación del componente `CallNumber` de Ionic Native
+<2> Inyectar el componente `CallNumber` para poder hacer uso de él
+<3> Método para abrir en un navegador aparte enlaces a páginas externas
+<4> Método para efectuar una llamada de teléfono al número indicado
+====
+
+[CAUTION]
+====
+No olvidar modificar el archivo `app.module.ts` para cargar el componente `CallNumber`
+
+[source]
+----
+...
+import { CallNumber } from '@ionic-native/call-number'; <1>
+...
+@NgModule({
+  ...
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CallNumber <2>
+  ]
+  ...
+})
+export class AppModule {}
+----
+<1> Importación de la librería
+<2> Incoporación del componente a los _providers_
+====

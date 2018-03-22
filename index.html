@@ -869,14 +869,222 @@ export class EstudiosPage {
 </div>
 <div class="sect2">
 <h3 id="truemodificaci-n-de-la-p-gina-de-contacto"><a class="anchor" href="#truemodificaci-n-de-la-p-gina-de-contacto"></a>1.7. Modificación de la página de contacto</h3>
+<div class="exampleblock">
+<div class="title">Example 3. El archivo <code>src/app/pages/contact/contact.html</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>&lt;ion-header&gt;
+  &lt;ion-navbar&gt;
+    &lt;ion-title&gt;
+      Contacto
+    &lt;/ion-title&gt;
+  &lt;/ion-navbar&gt;
+&lt;/ion-header&gt;
 
+&lt;ion-content&gt;
+  &lt;img src = "../../assets/imgs/UAL.png"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+
+  &lt;ion-list&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+    &lt;ion-item (click)="openURL('https://www.google.com/maps/dir/?api=1&amp;destination=Universidad%20de%20Almer%C3%ADa')"&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;ion-icon name = "pin" item-start&gt;&lt;/ion-icon&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+      &lt;p&gt;Carretera Sacramento s/n&lt;/p&gt; <i class="conum" data-value="5"></i><b>(5)</b>
+      &lt;p&gt;04120 La Cañada de San Urbano&lt;/p&gt;
+      &lt;p&gt;Almería&lt;/p&gt;
+    &lt;/ion-item&gt;
+
+    &lt;ion-item (click)="openURL('https://cms.ual.es/UAL/contacto/index.htm')"&gt;
+      &lt;ion-icon name = "mail" item-start&gt;&lt;/ion-icon&gt;
+      &lt;p&gt;Contacta con nostros&lt;/p&gt;
+    &lt;/ion-item&gt;
+  &lt;/ion-list&gt;
+
+  &lt;ion-item-group&gt; <i class="conum" data-value="6"></i><b>(6)</b>
+    &lt;ion-item-divider color="light"&gt;Teléfonos de interés&lt;/ion-item-divider&gt; <i class="conum" data-value="7"></i><b>(7)</b>
+    &lt;ion-item (click)="call('950214000')"&gt; <i class="conum" data-value="8"></i><b>(8)</b>
+      &lt;h2&gt;Información general para estudiantes (Secretaría)&lt;/h2&gt; <i class="conum" data-value="9"></i><b>(9)</b>
+      &lt;p&gt;+34 950 21 40 00&lt;/p&gt;
+      &lt;ion-icon name = "call" item-end&gt;&lt;/ion-icon&gt; <i class="conum" data-value="10"></i><b>(10)</b>
+    &lt;/ion-item&gt;
+    &lt;ion-item (click)="call('950214999')"&gt;
+      &lt;h2&gt;Cita previa&lt;/h2&gt;
+      &lt;p&gt;+34 950 21 49 99&lt;/p&gt;
+      &lt;ion-icon name = "call" item-end&gt;&lt;/ion-icon&gt;
+    &lt;/ion-item&gt;
+    &lt;ion-item (click)="call('950015550')"&gt;
+      &lt;h2&gt;Conserjería del Edificio Central&lt;/h2&gt;
+      &lt;p&gt;+34 950 01 55 50&lt;/p&gt;
+      &lt;ion-icon name = "call" item-end&gt;&lt;/ion-icon&gt;
+    &lt;/ion-item&gt;
+
+    &lt;ion-item-divider color="light"&gt;Centro de atención al usuario&lt;/ion-item-divider&gt;
+
+    &lt;ion-item (click)="openURL('https://otrspas.ual.es/otrs/customer.pl')"&gt; <i class="conum" data-value="11"></i><b>(11)</b>
+      &lt;ion-icon name = "link" item-end&gt;&lt;/ion-icon&gt;
+      &lt;p&gt;CAU de Administración y Servicios&lt;/p&gt;
+    &lt;/ion-item&gt;
+    &lt;ion-item (click)="openURL('https://otrs5.ual.es/otrs/customer.pl')"&gt;
+      &lt;ion-icon name = "link" item-end&gt;&lt;/ion-icon&gt;
+      &lt;p&gt;CAU de Servicios TIC&lt;/p&gt;
+    &lt;/ion-item&gt;
+
+  &lt;/ion-item-group&gt;
+&lt;/ion-content&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Imagen institucional</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Primer bloque de opciones de la pantalla</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Los elementos son enlaces a páginas externas. Pasamos al método <code>openURL()</code> del controlador la URL a abrir.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Creación de un icono colocado en la parte izquierda de la pantalla con <code>item-start</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Texto del elemento</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Segundo bloque de opciones de la pantalla</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Separador</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Creación del elemento y asignación del controlador de evento para llamada de teléfono. Pasaremos el número de teléfono al método <code>call()</code> de nuestro controlador.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Texto del elemento</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Creación de un icono colocado en la parte derecha de la pantalla con <code>item-end</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>Los elementos de la segunda lista son enlaces a páginas externas. Pasamos al método <code>openURL()</code> del controlador la URL a abrir.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 4. El archivo <code>src/pages/contact/contact.ts</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number'; <i class="conum" data-value="1"></i><b>(1)</b>
+
+@Component({
+  selector: 'page-contact',
+  templateUrl: 'contact.html'
+})
+export class ContactPage {
+
+  constructor(public navCtrl: NavController, private callNumber: CallNumber) { }<i class="conum" data-value="2"></i><b>(2)</b>
+
+  openURL(url: string) { <i class="conum" data-value="3"></i><b>(3)</b>
+    window.open(url, '__blank');
+  }
+
+  call(phoneNumber: string) { <i class="conum" data-value="4"></i><b>(4)</b>
+    this.callNumber.callNumber(phoneNumber, true)
+  .then(res =&gt; console.log('Launched dialer!', res))
+  .catch(err =&gt; console.log('Error launching dialer', err));
+
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Importación del componente <code>CallNumber</code> de Ionic Native</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Inyectar el componente <code>CallNumber</code> para poder hacer uso de él</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Método para abrir en un navegador aparte enlaces a páginas externas</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Método para efectuar una llamada de teléfono al número indicado</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>No olvidar modificar el archivo <code>app.module.ts</code> para cargar el componente <code>CallNumber</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>...
+import { CallNumber } from '@ionic-native/call-number'; <i class="conum" data-value="1"></i><b>(1)</b>
+...
+@NgModule({
+  ...
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CallNumber <i class="conum" data-value="2"></i><b>(2)</b>
+  ]
+  ...
+})
+export class AppModule {}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Importación de la librería</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Incoporación del componente a los <em>providers</em></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 15:06:01 CET
+Last updated 2018-03-22 17:59:43 CET
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
